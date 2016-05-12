@@ -1,28 +1,33 @@
 
-#include <iostream>
-#include <initializer_list>
-#include <vector>
 #include "LeetCode.h"
+#include <iostream>
+#include <tuple>
 
 using namespace std;
-
-bool testTwoSum()
-{
-    vector<int> in = {0, 2, 15, 7, 11, 11, 13};
-    auto target = 9;
-    auto res = LeetCode::twoSum(in, target);
-    return res == vector<int>({1, 3});
-}
 
 int main()
 {
     cout << "Test begin ..." << endl;
+    cout << "=======================================" << endl;
 
+    auto res = TestUnitRegistry::instance().run();
+    auto succeeded = std::get<0>(res);
+    auto failed = std::get<1>(res);
+    cout << "succeeded tests: " << endl;
+    int ic = 0;
+    for (auto& name : succeeded)
+    {
+        cout << "    " << ++ic << ". "<< name << endl;
+    }
 
-    bool bRet = true;
+    ic = 0;
+    cout << endl << "failed tests: " << endl;
+    for (auto& name : failed)
+    {
+        cout << "    " << ++ic << ". " << name << endl;
+    }
 
-    bRet &= testTwoSum();
-
-    cout << (bRet ? "Success." : "Failed. ") << endl;
+    cout << endl << "=======================================" << endl;
+    cout << "done" << endl;
     return 0;
 }
